@@ -26,7 +26,7 @@ public class AuthenticationService {
         UserEntity user = UserEntity.builder()
                 .firstname(registerDTO.getFirstname())
                 .lastname(registerDTO.getLastname())
-                .login(registerDTO.getLogin())
+                .email(registerDTO.getEmail())
                 .password(passwordEncoder.encode(registerDTO.getPassword()))
                 .build();
 

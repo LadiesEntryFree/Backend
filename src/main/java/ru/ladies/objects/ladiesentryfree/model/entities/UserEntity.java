@@ -26,9 +26,13 @@ public class UserEntity implements UserDetails {
     private String firstname;
     @Column(name = "last_name")
     private String lastname;
+    @Column(name = "patronymic")
+    private String patronymic;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "phone")
+    private String phone;
     @Column(name = "password")
     private String password;
 
@@ -47,7 +51,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return email;
     }
 
     @Override
