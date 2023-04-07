@@ -1,13 +1,13 @@
-package ru.ladies.objects.ladiesentryfirst;
+package ru.ladies.objects.ladiesentryfree;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LadiesEntryFirstApplication {
+public class LadiesEntryFreeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LadiesEntryFirstApplication.class, args);
+        SpringApplication.run(LadiesEntryFreeApplication.class, args);
     }
 
 }
