@@ -13,8 +13,7 @@ public class ObjectDTO {
     private String address;
     private String type;
     private String status;
-    private Double areaValue;
-    private String areaMeasure;
+    private Double area;
     private String actualUser;
     private String owner;
     private List<AttachmentDTO> attachments;

@@ -12,7 +12,7 @@ import ru.ladies.objects.ladiesentryfree.model.dto.RegisterRequestDTO;
 import ru.ladies.objects.ladiesentryfree.service.AuthenticationService;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationService authService;
