@@ -1,13 +1,19 @@
 package ru.ladies.objects.ladiesentryfree.model.entities.objectRelated;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "Object")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Object {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
