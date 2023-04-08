@@ -1,4 +1,4 @@
-package ru.ladies.objects.ladiesentryfree.model.entities;
+package ru.ladies.objects.ladiesentryfree.model.entities.userRelated;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,12 +12,12 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Role")
-public class RoleEntity implements GrantedAuthority {
+public class Role implements GrantedAuthority {
     @Id
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<UserEntity> users;
+    private List<User> users;
 
     @Override
     public String getAuthority() {

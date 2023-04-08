@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.ladies.objects.ladiesentryfree.model.dto.AuthRequestDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.AuthenticationResponseDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.RegisterRequestDTO;
-import ru.ladies.objects.ladiesentryfree.model.entities.UserEntity;
+import ru.ladies.objects.ladiesentryfree.model.entities.userRelated.User;
 import ru.ladies.objects.ladiesentryfree.repository.UserRepository;
 import ru.ladies.objects.ladiesentryfree.service.security.JwtService;
 
@@ -23,7 +23,7 @@ public class AuthenticationService {
 
 
     public AuthenticationResponseDTO register(RegisterRequestDTO registerDTO) {
-        UserEntity user = UserEntity.builder()
+        User user = User.builder()
                 .firstname(registerDTO.getFirstname())
                 .lastname(registerDTO.getLastname())
                 .email(registerDTO.getEmail())
@@ -46,7 +46,7 @@ public class AuthenticationService {
                 )
         );
 
-        UserEntity user = userRepository.findByEmail(authDTO.getLogin())
+        User user = userRepository.findByEmail(authDTO.getLogin())
                 .orElseThrow();
 
         String jwtToken = jwtService.generateToken(user);

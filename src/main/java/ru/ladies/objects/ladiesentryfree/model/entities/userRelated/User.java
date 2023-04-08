@@ -1,4 +1,4 @@
-package ru.ladies.objects.ladiesentryfree.model.entities;
+package ru.ladies.objects.ladiesentryfree.model.entities.userRelated;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "User")
-public class UserEntity implements UserDetails {
+@Table(name = "User_Info")
+public class User implements UserDetails {
     @Id
     @GeneratedValue
     private long id;
@@ -42,7 +42,7 @@ public class UserEntity implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_name", referencedColumnName = "name")
     )
-    private List<RoleEntity> roles;
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
