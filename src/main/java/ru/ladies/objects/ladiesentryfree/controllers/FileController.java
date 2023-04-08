@@ -15,7 +15,7 @@ import java.io.File;
 
 
 @RestController
-@RequestMapping("/api/files")
+@RequestMapping("/api/v1/files")
 @RequiredArgsConstructor
 public class FileController {
 
