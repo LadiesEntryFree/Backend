@@ -3,6 +3,8 @@ package ru.ladies.objects.ladiesentryfree.model.entities.objectRelated;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "Object")
@@ -44,8 +46,7 @@ public class Object {
     @JoinColumn(name = "actual_user", nullable = false)
     private ActualUser actualUser;
 
-    @ManyToOne
-    @JoinColumn(name = "attachment", nullable = false)
-    private Attachment attachment;
+    @OneToMany(mappedBy = "object")
+    private List<Attachment> attachments;
 
 }

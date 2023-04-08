@@ -17,4 +17,8 @@ public class Attachment {
 
     @Column(name = "file_name")
     private String fileName;
+
+    @ManyToOne
+    @JoinColumn(name = "object_id", nullable = false)
+    private Object object;
 }
