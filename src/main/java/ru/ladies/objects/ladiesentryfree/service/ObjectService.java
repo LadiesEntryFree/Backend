@@ -3,7 +3,7 @@ package ru.ladies.objects.ladiesentryfree.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.ladies.objects.ladiesentryfree.mappers.ObjectMapper;
-import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDto;
+import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
 import ru.ladies.objects.ladiesentryfree.repository.ObjectRepository;
 
@@ -19,29 +19,29 @@ public class ObjectService {
 
     //TODO дописать
 
-    public void save(ObjectDto dto) {
+    public void save(ObjectDTO dto) {
         objectRepository.save(objectMapper.map(dto));
 
     }
 
-    public void edit(int id, ObjectDto dto) {
+    public void edit(int id, ObjectDTO dto) {
         Optional<Object> maybeOldObject = objectRepository.findById(id);
         Object updatedObject = objectMapper.map(dto);
     }
 
-    public void delete(int id, ObjectDto dto) {
+    public void delete(int id, ObjectDTO dto) {
 
     }
 
-    public ObjectDto getNewObject() {
-        return new ObjectDto();
+    public ObjectDTO getNewObject() {
+        return new ObjectDTO();
     }
 
-    public ObjectDto getObject(int id) {
-        return new ObjectDto();
+    public ObjectDTO getObject(int id) {
+        return new ObjectDTO();
     }
 
-    public List<ObjectDto> getObjects() {
+    public List<ObjectDTO> getObjects() {
         return List.of();
     }
 

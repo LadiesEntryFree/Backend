@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ObjectDTO {
+public class ObjectDto {
 
     private Integer id;
     private String county;
@@ -17,7 +17,7 @@ public class ObjectDTO {
     private String areaMeasure;
     private String actualUser;
     private String owner;
-    private List<AttachmentDTO> attachments;
+    private List<AttachmentDto> attachments;
     private List<CustomFieldDTO> customFields;
 
 }
