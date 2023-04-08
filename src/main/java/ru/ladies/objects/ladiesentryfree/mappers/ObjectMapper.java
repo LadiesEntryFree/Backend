@@ -4,7 +4,9 @@ package ru.ladies.objects.ladiesentryfree.mappers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
-import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDto;
+import ru.ladies.objects.ladiesentryfree.model.dto.FilterDTO;
+import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
+import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
 
 import java.util.List;
@@ -16,11 +18,11 @@ public class ObjectMapper {
 
     private final AttachmentMapper attachmentMapper;
 
-    public ObjectDto map(Object object) {
+    public ObjectDTO map(Object object) {
         if (object == null) {
-            return new ObjectDto();
+            return new ObjectDTO();
         }
-        ObjectDto dto = new ObjectDto();
+        ObjectDTO dto = new ObjectDTO();
         dto.setId(object.getId());
         dto.setType(object.getType());
         dto.setActualUser(object.getActualUser());
@@ -35,13 +37,13 @@ public class ObjectMapper {
         return dto;
     }
 
-    public ObjectDto map(Object object, List<CustomFieldDTO> customFields) {
-        ObjectDto dto = map(object);
+    public ObjectDTO map(Object object, List<CustomFieldDTO> customFields) {
+        ObjectDTO dto = map(object);
         dto.setCustomFields(customFields);
         return dto;
     }
 
-    public Object map(ObjectDto dto) {
+    public Object map(ObjectDTO dto) {
         Object object = new Object();
         object.setId(dto.getId());
         object.setCounty(dto.getCounty());
@@ -53,6 +55,18 @@ public class ObjectMapper {
         object.setStatus(dto.getStatus());
         object.setArea(dto.getArea());
         object.setAttachments(dto.getAttachments().stream().map(attachmentMapper::map).toList());
+        return object;
+    }
+
+    public Object map(FilterDTO dto) {
+        Object object = new Object();
+        object.setCounty(dto.getCounty());
+        object.setActualUser(dto.getActualUser());
+        object.setAddress(dto.getAddress());
+        object.setDistrict(dto.getDistrict());
+        object.setOwner(dto.getOwner());
+        object.setType(dto.getType());
+        object.setStatus(dto.getStatus());
         return object;
     }
 
