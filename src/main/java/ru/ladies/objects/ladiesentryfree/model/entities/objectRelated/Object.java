@@ -1,6 +1,7 @@
 package ru.ladies.objects.ladiesentryfree.model.entities.objectRelated;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,37 +21,29 @@ public class Object {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "county", nullable = false)
-    private County county;
+    @NotNull
+    private String county;
 
-    @ManyToOne
-    @JoinColumn(name = "district", nullable = false)
-    private District district;
+    @NotNull
+    private String district;
 
-    @ManyToOne
-    @JoinColumn(name = "address", nullable = false)
-    private Address address;
+    @NotNull
+    private String address;
 
-    @ManyToOne
-    @JoinColumn(name = "type", nullable = false)
-    private ObjectType type;
+    @NotNull
+    private String type;
 
-    @ManyToOne
-    @JoinColumn(name = "status", nullable = false)
-    private ObjectStatus status;
+    @NotNull
+    private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "area", nullable = false)
-    private Area area;
+    @NotNull
+    private Double area;
 
-    @ManyToOne
-    @JoinColumn(name = "owner", nullable = false)
-    private Owner owner;
+    @NotNull
+    private String owner;
 
-    @ManyToOne
-    @JoinColumn(name = "actual_user", nullable = false)
-    private ActualUser actualUser;
+    @NotNull
+    private String actualUser;
 
     @OneToMany(mappedBy = "object")
     private List<Attachment> attachments;

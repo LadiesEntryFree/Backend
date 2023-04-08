@@ -7,4 +7,6 @@ import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
 @Repository
 public interface ObjectRepository extends JpaRepository<Object, Integer> {
 
+    Object save(Object object);
+
 }

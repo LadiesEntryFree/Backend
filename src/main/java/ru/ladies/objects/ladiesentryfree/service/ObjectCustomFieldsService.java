@@ -19,12 +19,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CustomFieldsService {
+public class ObjectCustomFieldsService {
 
     private final AttributeValueRepository attributeValueRepository;
     private final ObjectAttributeRepository objectAttributeRepository;
     private final AttributeRepository attributeRepository;
-
     private final AttributeMapper attributeMapper;
 
     public List<CustomFieldDTO> getByObject(Object object) {
@@ -42,7 +41,7 @@ public class CustomFieldsService {
 
     //TODO вынести создание атрибутов в отдельный сервис
     @Transactional
-    public void updateCustomFieldsValuesOfObject(Object object, List<CustomFieldDTO> customFieldDTOS) {
+    public void updateCustomFieldsValues(Object object, List<CustomFieldDTO> customFieldDTOS) {
         customFieldDTOS.forEach(customFieldDTO -> {
             Attribute attribute = attributeRepository.findByName(customFieldDTO.getName())
                     .orElse(attributeRepository.save(new Attribute(customFieldDTO.getName(), customFieldDTO.getType())));
