@@ -1,7 +1,9 @@
 package ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.ladies.objects.ladiesentryfree.model.entities.attribute.Attribute;
 import ru.ladies.objects.ladiesentryfree.model.entities.attribute.AttributeValue;
 
@@ -11,6 +13,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Solution_Attribute")
 @IdClass(SolutionAttribute.SolutionAttributeId.class)
+@AllArgsConstructor
+@NoArgsConstructor
 public class SolutionAttribute {
     @Id
     @ManyToOne
