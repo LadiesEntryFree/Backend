@@ -1,7 +1,9 @@
 package ru.ladies.objects.ladiesentryfree.model.entities.objectRelated;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.ladies.objects.ladiesentryfree.model.entities.attribute.Attribute;
 import ru.ladies.objects.ladiesentryfree.model.entities.attribute.AttributeValue;
 
@@ -11,6 +13,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Object_Attribute")
 @IdClass(ObjectAttribute.ObjectId.class)
+@AllArgsConstructor
+@NoArgsConstructor
 public class ObjectAttribute {
     @Id
     @ManyToOne
@@ -29,6 +33,8 @@ public class ObjectAttribute {
 
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class ObjectId implements Serializable {
         private Integer object;
         private String attribute;

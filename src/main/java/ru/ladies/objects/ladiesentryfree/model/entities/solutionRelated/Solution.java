@@ -19,5 +19,5 @@ public class Solution {
     private java.time.Duration term;
 
     @Column(name = "executor", nullable = false)
-    private String executor;
+    private String executor; //TODO группа
 }

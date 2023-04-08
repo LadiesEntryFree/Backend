@@ -6,6 +6,8 @@ import java.util.List;
 
 @Data
 public class ObjectDto {
+
+    private Integer id;
     private String county;
     private String district;
     private String address;
@@ -15,6 +17,7 @@ public class ObjectDto {
     private String areaMeasure;
     private String actualUser;
     private String owner;
+    private List<AttachmentDto> attachments;
     private List<CustomFieldDTO> customFields;
 
 }
