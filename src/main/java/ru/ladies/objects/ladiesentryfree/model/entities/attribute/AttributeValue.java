@@ -1,11 +1,14 @@
 package ru.ladies.objects.ladiesentryfree.model.entities.attribute;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Attribute_Value")
+@NoArgsConstructor
 public class AttributeValue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +22,10 @@ public class AttributeValue {
 
     @Column(name = "value", nullable = false)
     private String value;
+
+    public AttributeValue(Attribute attribute, String value) {
+        this.attribute = attribute;
+        this.value = value;
+    }
 
 }

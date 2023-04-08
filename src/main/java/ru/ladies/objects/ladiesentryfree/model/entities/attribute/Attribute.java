@@ -1,11 +1,15 @@
 package ru.ladies.objects.ladiesentryfree.model.entities.attribute;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Attribute")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Attribute {
     @Id
     @Column(name = "name", nullable = false)

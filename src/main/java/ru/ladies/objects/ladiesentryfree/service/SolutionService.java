@@ -53,7 +53,7 @@ public class SolutionService {
 //    }
     //TODO сделать нормальный маппинг кастомных полей. Смотреть в маппере
 
-    public List<Solution> getSolutions() {
+    public List<SolutionDTO> getSolutions() {
         //TODO доставать порционно решения из бд и отправлять на фронт
     }
 }
