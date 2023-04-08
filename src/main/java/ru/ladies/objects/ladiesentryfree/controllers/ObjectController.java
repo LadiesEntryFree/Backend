@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDto;
+import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
 import ru.ladies.objects.ladiesentryfree.service.ObjectService;
 
 import java.util.List;
@@ -19,12 +19,12 @@ public class ObjectController {
 
 
     @PostMapping("/new")
-    public ResponseEntity<Integer> createObject(@RequestBody ObjectDto dto) {
+    public ResponseEntity<Integer> createObject(@RequestBody ObjectDTO dto) {
         return new ResponseEntity<>(objectService.create(dto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}/edit")
-    public ResponseEntity<HttpStatus> updateObject(@PathVariable Integer id, @RequestBody ObjectDto dto) {
+    public ResponseEntity<HttpStatus> updateObject(@PathVariable Integer id, @RequestBody ObjectDTO dto) {
         objectService.update(id, dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -36,17 +36,17 @@ public class ObjectController {
     }
 
     @GetMapping("/new")
-    public ResponseEntity<ObjectDto> getEmptyObject() {
+    public ResponseEntity<ObjectDTO> getEmptyObject() {
         return new ResponseEntity<>(objectService.getNewObject(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ObjectDto> getObject(@PathVariable Integer id) {
+    public ResponseEntity<ObjectDTO> getObject(@PathVariable Integer id) {
         return new ResponseEntity<>(objectService.getObject(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<ObjectDto>> getObjects(@RequestParam Integer amount, @RequestParam Integer skip) {
+    public ResponseEntity<List<ObjectDTO>> getObjects(@RequestParam Integer amount, @RequestParam Integer skip) {
         return new ResponseEntity<>(objectService.getObjects(amount, skip), HttpStatus.OK);
     }
 }

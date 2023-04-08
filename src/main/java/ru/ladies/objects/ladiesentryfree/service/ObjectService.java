@@ -22,13 +22,13 @@ public class ObjectService {
 
     //TODO дописать
 
-    public Integer create(ObjectDto dto) {
+    public Integer create(ObjectDTO dto) {
         return objectRepository.save(objectMapper.map(dto)).getId();
 
     }
 
     @Transactional
-    public void update(Integer id, ObjectDto dto) {
+    public void update(Integer id, ObjectDTO dto) {
         Object oldObject = objectRepository.findById(id)
                 .orElseThrow(() -> new NoEntityFoundException("Нет объекта с id " + id));
 
@@ -44,17 +44,17 @@ public class ObjectService {
         objectRepository.delete(object);
     }
 
-    public ObjectDto getNewObject() {
-        return new ObjectDto();
+    public ObjectDTO getNewObject() {
+        return new ObjectDTO();
     }
 
-    public ObjectDto getObject(Integer id) {
+    public ObjectDTO getObject(Integer id) {
         Object object = objectRepository.findById(id).orElseThrow(() -> new NoEntityFoundException("Нет объекта с id " + id));
 
         return objectMapper.map(object, objectCustomFieldsService.getByObject(object));
     }
 
-    public List<ObjectDto> getObjects(Integer amount, Integer skip) {
+    public List<ObjectDTO> getObjects(Integer amount, Integer skip) {
         return objectRepository.findAll().stream().skip(skip).limit(amount).map(objectMapper::map).collect(Collectors.toList());
     }
 

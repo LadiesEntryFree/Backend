@@ -4,9 +4,11 @@ package ru.ladies.objects.ladiesentryfree.mappers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
-import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDto;
+
+import ru.ladies.objects.ladiesentryfree.model.dto.FilterDTO;
+import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
-import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.*;
+
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class ObjectMapper {
 
     private final AttachmentMapper attachmentMapper;
 
-    public ObjectDTO map(Object object, List<CustomFieldDTO> customFields) {
+    public ObjectDTO map(Object object) {
         if (object == null) {
             return new ObjectDTO();
         }
@@ -36,8 +38,8 @@ public class ObjectMapper {
         return dto;
     }
 
-    public ObjectDto map(Object object, List<CustomFieldDTO> customFields) {
-        ObjectDto dto = map(object);
+    public ObjectDTO map(Object object, List<CustomFieldDTO> customFields) {
+        ObjectDTO dto = map(object);
         dto.setCustomFields(customFields);
         return dto;
     }
@@ -61,14 +63,12 @@ public class ObjectMapper {
     public Object map(FilterDTO dto) {
         Object object = new Object();
         object.setCounty(dto.getCounty());
-        object.setActualUser(new ActualUser(dto.getActualUser()));
-        object.setAddress(new Address(dto.getAddress()));
-        object.setDistrict(new District(dto.getDistrict()));
-        object.setOwner(new Owner(dto.getOwner()));
-        object.setType(new ObjectType(dto.getType()));
-        object.setStatus(new ObjectStatus(dto.getStatus()));
+        object.setActualUser(dto.getActualUser());
+        object.setAddress(dto.getAddress());
+        object.setDistrict(dto.getDistrict());
+        object.setOwner(dto.getOwner());
+        object.setType(dto.getType());
+        object.setStatus(dto.getStatus());
         return object;
     }
-
-
 }
