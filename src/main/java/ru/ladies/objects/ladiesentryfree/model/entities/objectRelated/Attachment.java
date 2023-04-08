@@ -12,9 +12,9 @@ public class Attachment {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "photo")
-    private Integer photo;
+    @Column(name = "document_id")
+    private Integer documentID;
 
-    @Column(name = "video")
-    private Integer video;
+    @Column(name = "file_name")
+    private String fileName;
 }
