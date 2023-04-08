@@ -40,6 +40,7 @@ public class CustomFieldsService {
 
     }
 
+    //TODO вынести создание атрибутов в отдельный сервис
     @Transactional
     public void updateCustomFieldsValuesOfObject(Object object, List<CustomFieldDTO> customFieldDTOS) {
         customFieldDTOS.forEach(customFieldDTO -> {
@@ -56,7 +57,8 @@ public class CustomFieldsService {
 
                 }
             } else {
-                ObjectAttribute objectAttribute = new ObjectAttribute(object, attribute, new AttributeValue(attribute, customFieldDTO.getValue()));
+                ObjectAttribute objectAttribute =
+                        new ObjectAttribute(object, attribute, attributeValueRepository.save(new AttributeValue(attribute, customFieldDTO.getValue())));
                 objectAttributeRepository.save(objectAttribute);
             }
 
