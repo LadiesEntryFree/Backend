@@ -5,6 +5,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import ru.ladies.objects.ladiesentryfree.model.dto.UploadFileDTO;
 import ru.ladies.objects.ladiesentryfree.repository.FileRepository;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +26,15 @@ public class FileService {
         ObjectId objectId = new ObjectId(id);
         GridFsResource gridFsResource = fileRepository.getResource(objectId);
         return getFile(gridFsResource);
+    }
+
+    public UploadFileDTO uploadFile(MultipartFile file) throws IOException {
+        ObjectId id = fileRepository.saveFile(file.getInputStream(), file.getName());
+        return new UploadFileDTO(id.toHexString(), file.getName());
+    }
+
+    public void deleteFile(String id) {
+        fileRepository.deleteFile(new ObjectId(id));
     }
 
     private File getFile(GridFsResource gridFsResource) throws IOException {

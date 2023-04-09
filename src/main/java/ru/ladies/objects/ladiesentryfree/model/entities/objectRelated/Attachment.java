@@ -13,7 +13,7 @@ public class Attachment {
     private Integer id;
 
     @Column(name = "document_id")
-    private Integer documentID;
+    private String documentID;
 
     @Column(name = "file_name")
     private String fileName;

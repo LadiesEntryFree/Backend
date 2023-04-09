@@ -1,9 +1,11 @@
 package ru.ladies.objects.ladiesentryfree.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class AttachmentDTO {
+@AllArgsConstructor
+public class UploadFileDTO {
     private String id;
     private String filename;
 }
