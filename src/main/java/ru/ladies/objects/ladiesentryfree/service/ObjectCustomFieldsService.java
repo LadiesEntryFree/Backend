@@ -13,6 +13,7 @@ import ru.ladies.objects.ladiesentryfree.repository.AttributeRepository;
 import ru.ladies.objects.ladiesentryfree.repository.AttributeValueRepository;
 import ru.ladies.objects.ladiesentryfree.repository.ObjectAttributeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,6 +27,13 @@ public class ObjectCustomFieldsService {
     private final AttributeRepository attributeRepository;
     private final AttributeMapper attributeMapper;
 
+    public List<CustomFieldDTO> getAllFCustomFields() {
+        List<ObjectAttribute> objectAttributes = objectAttributeRepository.findAll();
+
+        return objectAttributes.stream()
+                .map(objectAttribute -> attributeMapper.map(objectAttribute, new ArrayList<>())).toList();
+    }
+
     public List<CustomFieldDTO> getByObject(Object object) {
         List<ObjectAttribute> objectAttributes = objectAttributeRepository.findByObject(object);
         return objectAttributes.stream().map(objectAttribute ->
@@ -35,7 +43,6 @@ public class ObjectCustomFieldsService {
                     .toList();
             return attributeMapper.map(objectAttribute, values);
         }).toList();
-
 
     }
 
