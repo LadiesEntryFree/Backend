@@ -44,6 +44,14 @@ public class User implements UserDetails {
     )
     private List<Role> roles;
 
+    @ManyToMany
+    @JoinTable(
+            name = "Group_User",
+            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    private List<ExecutionGroup> executionGroups;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

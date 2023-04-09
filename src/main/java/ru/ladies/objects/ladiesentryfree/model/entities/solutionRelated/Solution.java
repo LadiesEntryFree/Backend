@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
+import ru.ladies.objects.ladiesentryfree.model.entities.userRelated.ExecutionGroup;
 
 @Data
 @Entity
@@ -30,8 +31,9 @@ public class Solution {
     @Enumerated(EnumType.STRING)
     private SolutionStatus solutionStatus;
 
-    @Column(name = "executor", nullable = false)
-    private String executor;
+    @ManyToOne
+    @JoinColumn(name = "executor_id", referencedColumnName = "id", nullable = false)
+    private ExecutionGroup executor;
 
     @ManyToOne
     @JoinColumn(name = "object_id", referencedColumnName = "id", nullable = false)

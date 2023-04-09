@@ -7,6 +7,8 @@ import ru.ladies.objects.ladiesentryfree.mappers.SolutionMapper;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.SolutionDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.Solution;
+import ru.ladies.objects.ladiesentryfree.model.entities.userRelated.ExecutionGroup;
+import ru.ladies.objects.ladiesentryfree.repository.GroupRepository;
 import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.SolutionStatus;
 import ru.ladies.objects.ladiesentryfree.repository.SolutionRepository;
 import ru.ladies.objects.ladiesentryfree.utils.exception.NoEntityFoundException;
@@ -22,12 +24,16 @@ public class SolutionService {
     private final SolutionRepository solutionRepository;
     private final SolutionMapper solutionMapper;
     private final CustomSolutionFieldsService customSolutionFieldsService;
+    private final GroupRepository groupRepository;
 
 
     public Integer createSolution(SolutionDTO solutionDTO) {
         Solution solution = solutionMapper.map(solutionDTO);
 
         Solution created = solutionRepository.save(solution);
+
+        ExecutionGroup executionGroup = groupRepository.findByGroupName(solutionDTO.getExecutor().getName()).get();
+        solution.setExecutor(executionGroup);
 
         return created.getId();
     }
@@ -37,7 +43,10 @@ public class SolutionService {
         Solution oldSolution = solutionRepository.findById(id)
                 .orElseThrow(() -> new NoEntityFoundException("Нет решения с id " + id));
 
+        ExecutionGroup executor = groupRepository.findByGroupName(solutionDTO.getExecutor().getName()).get();
+
         Solution solution = solutionMapper.map(oldSolution, solutionDTO);
+        solution.setExecutor(executor);
         solutionRepository.save(solution);
 
         customSolutionFieldsService.updateCustomFieldsValuesOfSolution(solution, solutionDTO.getCustomFields());
