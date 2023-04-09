@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
+import ru.ladies.objects.ladiesentryfree.model.dto.QuestionDTO;
 import ru.ladies.objects.ladiesentryfree.service.ObjectService;
 
 import java.util.List;
@@ -55,4 +56,15 @@ public class ObjectController {
         return new ResponseEntity<>(objectService.getTotalCount(), HttpStatus.OK);
     }
 
+    @PostMapping("/{objectId}/question/new")
+    public ResponseEntity<HttpStatus> addQuestion(@PathVariable Integer objectId, @RequestBody QuestionDTO dto) {
+        objectService.createQuestion(objectId, dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @GetMapping("/{objectId}/questions")
+    public ResponseEntity<List<QuestionDTO>> getQuestions(@PathVariable Integer objectId) {
+        return new ResponseEntity<>(objectService.getQuestions(objectId), HttpStatus.OK);
+    }
 }
