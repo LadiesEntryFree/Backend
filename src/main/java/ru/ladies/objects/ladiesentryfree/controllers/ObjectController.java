@@ -49,4 +49,10 @@ public class ObjectController {
     public ResponseEntity<List<ObjectDTO>> getObjects(@RequestParam Integer amount, @RequestParam Integer skip) {
         return new ResponseEntity<>(objectService.getObjects(amount, skip), HttpStatus.OK);
     }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> getTotalCount() {
+        return new ResponseEntity<>(objectService.getTotalCount(), HttpStatus.OK);
+    }
+
 }
