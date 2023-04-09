@@ -3,17 +3,15 @@ package ru.ladies.objects.ladiesentryfree.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.ladies.objects.ladiesentryfree.exceptions.NoEntityFoundException;
 import ru.ladies.objects.ladiesentryfree.mappers.SolutionMapper;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.SolutionDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.Solution;
 import ru.ladies.objects.ladiesentryfree.model.entities.userRelated.ExecutionGroup;
 import ru.ladies.objects.ladiesentryfree.repository.GroupRepository;
-import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.SolutionStatus;
 import ru.ladies.objects.ladiesentryfree.repository.SolutionRepository;
-import ru.ladies.objects.ladiesentryfree.utils.exception.NoEntityFoundException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

@@ -24,7 +24,7 @@ public class Solution {
     @Column(name = "start_execution", nullable = false)
     private LocalDateTime start;
 
-    @Column(name = "end_execution", nullable = false)
+    @Column(name = "end_exexcution", nullable = false)
     private LocalDateTime end;
 
     @Column(name = "solution_status")
