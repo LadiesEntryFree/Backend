@@ -10,5 +10,6 @@ public class DashboardDTO {
     private EventStatusCountDTO eventStatusAndCount;
     private ObjectStatusCountDTO objectStatusAndCount;
     private SolutionStatusCountDTO solutionStatusAndCount;
+    private GroupCountDTO groupAndCount;
 
 }
