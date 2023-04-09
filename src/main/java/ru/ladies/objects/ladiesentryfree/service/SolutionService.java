@@ -1,7 +1,10 @@
 package ru.ladies.objects.ladiesentryfree.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.ladies.objects.ladiesentryfree.exceptions.NoEntityFoundException;
 import ru.ladies.objects.ladiesentryfree.mappers.SolutionMapper;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.SolutionDTO;
@@ -10,36 +13,33 @@ import ru.ladies.objects.ladiesentryfree.repository.SolutionRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class SolutionService {
     private final SolutionRepository solutionRepository;
-
     private final SolutionMapper solutionMapper;
+    private final CustomSolutionFieldsService customSolutionFieldsService;
 
-    @Autowired
-    public SolutionService(SolutionRepository solutionRepository, SolutionMapper solutionMapper) {
-        this.solutionRepository = solutionRepository;
-        this.solutionMapper = solutionMapper;
-    }
 
-    public void createSolution(SolutionDTO solutionDTO) {
+    public Integer createSolution(SolutionDTO solutionDTO) {
         Solution solution = solutionMapper.map(solutionDTO);
 
-        solutionRepository.save(solution);
+        Solution created = solutionRepository.save(solution);
+
+        return created.getId();
     }
 
-    public boolean isExists(Integer id) {
-        Optional<Solution> solution = solutionRepository.findById(id);
-
-        return solution.isPresent();
-    }
-
+    @Transactional
     public void updateSolution(Integer id, SolutionDTO solutionDTO) {
-        Solution solution = solutionMapper.map(solutionDTO);
-        solution.setId(id);
+        Solution oldSolution = solutionRepository.findById(id)
+                .orElseThrow(() -> new NoEntityFoundException("Нет решения с id " + id));
 
+        Solution solution = solutionMapper.map(oldSolution, solutionDTO);
         solutionRepository.save(solution);
+
+        customSolutionFieldsService.updateCustomFieldsValuesOfSolution(solution, solutionDTO.getCustomFields());
     }
 
     public SolutionDTO getSolution(Integer id) {
@@ -48,12 +48,12 @@ public class SolutionService {
         return solutionMapper.map(solution.get());
     }
 
-//    public SolutionDTO getSolutionFields() {
-//        List<CustomFieldDTO> solutionCustomFields =
-//    }
-    //TODO сделать нормальный маппинг кастомных полей. Смотреть в маппере
+    public SolutionDTO getEmptySolution() {
+        List<CustomFieldDTO> solutionCustomFields = customSolutionFieldsService.getAllSolutionFields();
+        return new SolutionDTO(solutionCustomFields);
+    }
 
-    public List<SolutionDTO> getSolutions() {
-        //TODO доставать порционно решения из бд и отправлять на фронт
+    public List<SolutionDTO> getSolutions(Integer amount, Integer skip) {
+        return solutionRepository.findAll().stream().skip(skip).limit(amount).map(solutionMapper::map).collect(Collectors.toList());
     }
 }

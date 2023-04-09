@@ -2,8 +2,9 @@ package ru.ladies.objects.ladiesentryfree.mappers;
 
 import org.springframework.stereotype.Component;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
-import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.SolutionAttribute;
+import ru.ladies.objects.ladiesentryfree.model.entities.attribute.AttributeValue;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.ObjectAttribute;
+import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.SolutionAttribute;
 
 import java.util.List;
 

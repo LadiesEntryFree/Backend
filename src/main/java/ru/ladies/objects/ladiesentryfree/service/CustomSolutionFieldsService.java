@@ -13,6 +13,7 @@ import ru.ladies.objects.ladiesentryfree.repository.AttributeRepository;
 import ru.ladies.objects.ladiesentryfree.repository.AttributeValueRepository;
 import ru.ladies.objects.ladiesentryfree.repository.SolutionAttributeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,17 +27,22 @@ public class CustomSolutionFieldsService {
 
     private final AttributeMapper attributeMapper;
 
+    public List<CustomFieldDTO> getAllSolutionFields() {
+        List<SolutionAttribute> solutionAttributes = solutionAttributeRepository.findAll();
+
+        return solutionAttributes.stream()
+                .map(solutionAttribute -> attributeMapper.map(solutionAttribute, new ArrayList<>())).toList();
+    }
+
     public List<CustomFieldDTO> getBySolution(Solution solution) {
-        List<SolutionAttribute> objectAttributes = solutionAttributeRepository.findBySolution(solution);
-        return objectAttributes.stream().map(objectAttribute ->
+        List<SolutionAttribute> solutionAttributes = solutionAttributeRepository.findBySolution(solution);
+        return solutionAttributes.stream().map(solutionAttribute ->
         {
-            List<String> values = attributeValueRepository.findByAttribute(objectAttribute.getAttribute()).stream()
+            List<String> values = attributeValueRepository.findByAttribute(solutionAttribute.getAttribute()).stream()
                     .map(AttributeValue::getValue)
                     .toList();
-            return attributeMapper.map(objectAttribute, values);
+            return attributeMapper.map(solutionAttribute, values);
         }).toList();
-
-
     }
 
     @Transactional
