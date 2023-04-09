@@ -9,6 +9,7 @@ import ru.ladies.objects.ladiesentryfree.model.entities.event.Event;
 import ru.ladies.objects.ladiesentryfree.model.entities.event.EventStatus;
 import ru.ladies.objects.ladiesentryfree.repository.EventRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,5 +29,11 @@ public class EventService {
         return eventRepository.findByStatus(status).stream().map(eventMapper::map).toList();
     }
 
-
+    public void overdueEvents() {
+        List<Event> events = eventRepository.findAllByEndBeforeAndAndStatusIsNot(LocalDateTime.now(), EventStatus.PAST);
+        for (Event event : events) {
+            event.setStatus(EventStatus.PAST);
+            eventRepository.save(event);
+        }
+    }
 }
