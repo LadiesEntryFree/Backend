@@ -1,6 +1,7 @@
 package ru.ladies.objects.ladiesentryfree.controllers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import java.io.File;
 @RestController
 @RequestMapping("/api/v1/files")
 @RequiredArgsConstructor
+@Slf4j
 public class FileController {
 
     private final FileService fileService;

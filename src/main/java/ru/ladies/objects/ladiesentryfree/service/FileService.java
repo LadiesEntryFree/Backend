@@ -29,8 +29,8 @@ public class FileService {
     }
 
     public UploadFileDTO uploadFile(MultipartFile file) throws IOException {
-        ObjectId id = fileRepository.saveFile(file.getInputStream(), file.getName());
-        return new UploadFileDTO(id.toHexString(), file.getName());
+        ObjectId id = fileRepository.saveFile(file.getInputStream(), file.getOriginalFilename());
+        return new UploadFileDTO(id.toHexString(), file.getOriginalFilename());
     }
 
     public void deleteFile(String id) {
