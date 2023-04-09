@@ -23,6 +23,7 @@ public class ObjectService {
     private final ObjectCustomFieldsService objectCustomFieldsService;
 
 
+    @Transactional
     public Integer create(ObjectDTO dto) {
         return objectRepository.save(objectMapper.map(dto)).getId();
 
