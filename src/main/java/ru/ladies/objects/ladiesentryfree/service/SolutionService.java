@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class SolutionService {
     private final SolutionRepository solutionRepository;
     private final SolutionMapper solutionMapper;
-    private final CustomSolutionFieldsService customSolutionFieldsService;
     private final GroupRepository groupRepository;
 
 
@@ -48,8 +47,6 @@ public class SolutionService {
         Solution solution = solutionMapper.map(oldSolution, solutionDTO);
         solution.setExecutor(executor);
         solutionRepository.save(solution);
-
-        customSolutionFieldsService.updateCustomFieldsValuesOfSolution(solution, solutionDTO.getCustomFields());
     }
 
     public SolutionDTO getSolution(Integer id) {
@@ -59,8 +56,7 @@ public class SolutionService {
     }
 
     public SolutionDTO getEmptySolution() {
-        List<CustomFieldDTO> solutionCustomFields = customSolutionFieldsService.getAllSolutionFields();
-        return new SolutionDTO(solutionCustomFields);
+        return new SolutionDTO();
     }
 
     public List<SolutionDTO> getSolutions(Integer amount, Integer skip) {

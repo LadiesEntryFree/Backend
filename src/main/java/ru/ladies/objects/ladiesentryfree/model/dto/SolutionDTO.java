@@ -13,11 +13,4 @@ public class SolutionDTO {
     private LocalDateTime end;
     private SolutionStatus solutionStatus;
     private GroupDTO executor;
-    private List<CustomFieldDTO> customFields;
-
-    public SolutionDTO(){}
-
-    public SolutionDTO(List<CustomFieldDTO> customFields) {
-        this.customFields = customFields;
-    }
 }

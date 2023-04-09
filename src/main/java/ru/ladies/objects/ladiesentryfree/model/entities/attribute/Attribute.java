@@ -18,7 +18,4 @@ public class Attribute {
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private Type type;
-
-
-
 }
