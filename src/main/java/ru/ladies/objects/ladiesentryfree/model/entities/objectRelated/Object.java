@@ -53,7 +53,11 @@ public class Object {
     @OneToMany(mappedBy = "object")
     private List<Solution> solutions;
 
+    @OneToMany(mappedBy = "object")
+    private List<Question> questions;
+
     @ManyToMany(mappedBy = "objects")
     private List<Event> events;
+
 
 }

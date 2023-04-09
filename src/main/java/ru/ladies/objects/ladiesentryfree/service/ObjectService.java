@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ladies.objects.ladiesentryfree.mappers.ObjectMapper;
+import ru.ladies.objects.ladiesentryfree.mappers.QuestionMapper;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
+import ru.ladies.objects.ladiesentryfree.model.dto.QuestionDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.ObjectStatus;
+import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Question;
 import ru.ladies.objects.ladiesentryfree.repository.ObjectRepository;
+import ru.ladies.objects.ladiesentryfree.repository.QuestionRepository;
 import ru.ladies.objects.ladiesentryfree.utils.exception.NoEntityFoundException;
 
 import java.util.List;
@@ -19,7 +23,10 @@ import java.util.stream.Collectors;
 public class ObjectService {
 
     private final ObjectRepository objectRepository;
+    private final QuestionRepository questionRepository;
     private final ObjectMapper objectMapper;
+
+    private final QuestionMapper questionMapper;
     private final ObjectCustomFieldsService objectCustomFieldsService;
 
 
@@ -70,4 +77,16 @@ public class ObjectService {
         return objectRepository.countByStatus(status);
     }
 
+    public List<QuestionDTO> getQuestions(Integer objectId) {
+        Object object = objectRepository.findById(objectId).orElseThrow(() -> new NoEntityFoundException("Нет объекта с id " + objectId));
+        return questionRepository.findAllByObject(object).stream().map(questionMapper::map).toList();
+    }
+
+    @Transactional
+    public void createQuestion(Integer objectId, QuestionDTO questionDTO) {
+        Object object = objectRepository.findById(objectId).orElseThrow(() -> new NoEntityFoundException("Нет объекта с id " + objectId));
+        Question question = questionMapper.map(questionDTO);
+        question.setObject(object);
+        questionRepository.save(question);
+    }
 }
