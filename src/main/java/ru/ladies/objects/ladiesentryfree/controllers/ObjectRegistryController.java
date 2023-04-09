@@ -12,7 +12,7 @@ import ru.ladies.objects.ladiesentryfree.model.dto.FilterDTO;
 import ru.ladies.objects.ladiesentryfree.service.ObjectRegistryService;
 
 @RestController
-@RequestMapping("/api/registry")
+@RequestMapping("/api/v1/registry")
 @RequiredArgsConstructor
 public class ObjectRegistryController {
 
