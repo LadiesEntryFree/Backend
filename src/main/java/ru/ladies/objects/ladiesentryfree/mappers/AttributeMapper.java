@@ -2,25 +2,27 @@ package ru.ladies.objects.ladiesentryfree.mappers;
 
 import org.springframework.stereotype.Component;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
+import ru.ladies.objects.ladiesentryfree.model.entities.attribute.AttributeValue;
 import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.SolutionAttribute;
+import ru.ladies.objects.ladiesentryfree.service.CustomSolutionFieldsService;
 
 import java.util.List;
 
 @Component
 public class AttributeMapper {
 
-    public CustomFieldDTO map(SolutionAttribute objectAttribute, List<String> possibleValues) {
+    public CustomFieldDTO map(SolutionAttribute solutionAttribute, List<String> possibleValues) {
 
         CustomFieldDTO dto = new CustomFieldDTO();
 
-        if (objectAttribute == null) {
+        if (solutionAttribute == null) {
             dto.setPossibleValues(possibleValues);
             return dto;
         }
 
-        dto.setName(objectAttribute.getAttribute().getName());
-        dto.setType(objectAttribute.getAttribute().getType());
-        dto.setValue(objectAttribute.getValue().getValue());
+        dto.setName(solutionAttribute.getAttribute().getName());
+        dto.setType(solutionAttribute.getAttribute().getType());
+        dto.setValue(solutionAttribute.getValue().getValue());
         dto.setPossibleValues(possibleValues);
         return dto;
     }
