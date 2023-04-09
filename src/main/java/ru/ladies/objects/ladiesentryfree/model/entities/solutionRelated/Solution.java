@@ -38,7 +38,4 @@ public class Solution {
     @ManyToOne
     @JoinColumn(name = "object_id", referencedColumnName = "id", nullable = false)
     private Object object;
-
-    @OneToMany(mappedBy = "solution")
-    private List<SolutionAttribute> attributes = new ArrayList<>();
 }
