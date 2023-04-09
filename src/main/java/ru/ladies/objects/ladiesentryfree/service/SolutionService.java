@@ -7,9 +7,11 @@ import ru.ladies.objects.ladiesentryfree.mappers.SolutionMapper;
 import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.SolutionDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.Solution;
+import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.SolutionStatus;
 import ru.ladies.objects.ladiesentryfree.repository.SolutionRepository;
 import ru.ladies.objects.ladiesentryfree.utils.exception.NoEntityFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -54,5 +56,13 @@ public class SolutionService {
 
     public List<SolutionDTO> getSolutions(Integer amount, Integer skip) {
         return solutionRepository.findAll().stream().skip(skip).limit(amount).map(solutionMapper::map).collect(Collectors.toList());
+    }
+
+    public void overdueSolutions() {
+        List<Solution> solutions = solutionRepository.findAllByEndBeforeAndSolutionStatusIsNot(LocalDateTime.now(), SolutionStatus.COMPLETED);
+        for (Solution solution : solutions) {
+            solution.setSolutionStatus(SolutionStatus.EXPIRED);
+            solutionRepository.save(solution);
+        }
     }
 }
