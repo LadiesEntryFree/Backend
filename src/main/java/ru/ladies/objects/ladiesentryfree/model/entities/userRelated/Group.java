@@ -13,8 +13,11 @@ public class Group {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "group_name")
+    @Column(name = "group_name", nullable = false)
     private String groupName;
+
+    @Column(name = "type_of_work", nullable = false)
+    private TypeOfWork typeOfWork;
 
     @ManyToMany(mappedBy = "groups")
     private List<User> users;
