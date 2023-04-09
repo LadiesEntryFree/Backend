@@ -50,7 +50,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    private List<Group> groups;
+    private List<ExecutionGroup> executionGroups;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

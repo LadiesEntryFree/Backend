@@ -12,7 +12,7 @@ public class SolutionDTO {
     private LocalDateTime start;
     private LocalDateTime end;
     private SolutionStatus solutionStatus;
-    private String executor;
+    private GroupDTO executor;
     private List<CustomFieldDTO> customFields;
 
     public SolutionDTO(){}
