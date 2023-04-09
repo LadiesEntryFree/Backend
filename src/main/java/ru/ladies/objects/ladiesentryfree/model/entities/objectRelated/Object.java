@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.Solution;
 
 import java.util.List;
 
@@ -47,5 +48,8 @@ public class Object {
 
     @OneToMany(mappedBy = "object")
     private List<Attachment> attachments;
+
+    @OneToMany(mappedBy = "object")
+    private List<Solution> solutions;
 
 }

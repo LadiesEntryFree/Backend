@@ -6,6 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
 
 @Data
 @Entity
@@ -31,6 +32,10 @@ public class Solution {
 
     @Column(name = "executor", nullable = false)
     private String executor;
+
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Object object;
 
     @OneToMany(mappedBy = "solution")
     private List<SolutionAttribute> attributes = new ArrayList<>();
