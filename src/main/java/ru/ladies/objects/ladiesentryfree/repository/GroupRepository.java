@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface GroupRepository extends JpaRepository<ExecutionGroup, Integer> {
     Optional<ExecutionGroup> findByGroupName(String name);
-    List<ExecutionGroup> findByUsers(List<User> users);
+    //List<ExecutionGroup> findByUsers(List<User> users);
 }
