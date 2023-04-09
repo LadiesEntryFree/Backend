@@ -7,6 +7,8 @@ import ru.ladies.objects.ladiesentryfree.model.entities.userRelated.User;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
+
+    Optional<User> findById(Long aLong);
 }

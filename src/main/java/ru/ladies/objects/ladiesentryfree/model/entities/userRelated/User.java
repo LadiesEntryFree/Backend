@@ -20,7 +20,7 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue
-    private long id;
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstname;
