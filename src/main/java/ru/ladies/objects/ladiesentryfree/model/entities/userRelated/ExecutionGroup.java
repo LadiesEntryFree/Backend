@@ -2,13 +2,14 @@ package ru.ladies.objects.ladiesentryfree.model.entities.userRelated;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.Solution;
 
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Group")
-public class Group {
+@Table(name = "Execution_Group")
+public class ExecutionGroup {
     @Id
     @GeneratedValue
     private Integer id;
@@ -19,7 +20,9 @@ public class Group {
     @Column(name = "type_of_work", nullable = false)
     private TypeOfWork typeOfWork;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "executionGroups")
     private List<User> users;
 
+    @OneToMany(mappedBy = "executor")
+    private List<Solution> solutions;
 }
