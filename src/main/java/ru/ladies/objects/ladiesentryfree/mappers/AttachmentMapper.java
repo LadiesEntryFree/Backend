@@ -10,7 +10,7 @@ public class AttachmentMapper {
     public AttachmentDTO map(Attachment attachment) {
         AttachmentDTO dto = new AttachmentDTO();
         dto.setFilename(attachment.getFileName());
-        dto.setId(attachment.getId());
+        dto.setId(attachment.getDocumentID());
         return dto;
     }
 
