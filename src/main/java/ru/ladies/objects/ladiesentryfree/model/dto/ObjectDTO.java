@@ -2,6 +2,7 @@ package ru.ladies.objects.ladiesentryfree.model.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.ObjectStatus;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class ObjectDTO {
     private String district;
     private String address;
     private String type;
-    private String status;
+    private ObjectStatus status;
     private Double area;
     private String actualUser;
     private String owner;

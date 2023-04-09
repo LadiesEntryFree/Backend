@@ -34,8 +34,8 @@ public class Object {
     @NotNull
     private String type;
 
-    @NotNull
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ObjectStatus status;
 
     @NotNull
     private Double area;
