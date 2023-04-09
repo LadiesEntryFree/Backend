@@ -20,13 +20,13 @@ public class SolutionController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<?> createSolution(SolutionDTO solutionDTO) {
+    public ResponseEntity<Integer> createSolution(SolutionDTO solutionDTO) {
         Integer createdSolutionId = solutionService.createSolution(solutionDTO);
         return new ResponseEntity<>(createdSolutionId, HttpStatus.OK);
     }
 
     @PutMapping("/{id}/edit")
-    public ResponseEntity<?> updateSolution(@PathVariable Integer id, SolutionDTO solutionDTO) {
+    public ResponseEntity<HttpStatus> updateSolution(@PathVariable Integer id, SolutionDTO solutionDTO) {
         solutionService.updateSolution(id, solutionDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

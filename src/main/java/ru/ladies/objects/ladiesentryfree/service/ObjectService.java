@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ladies.objects.ladiesentryfree.mappers.ObjectMapper;
+import ru.ladies.objects.ladiesentryfree.model.dto.CustomFieldDTO;
 import ru.ladies.objects.ladiesentryfree.model.dto.ObjectDTO;
 import ru.ladies.objects.ladiesentryfree.model.entities.objectRelated.Object;
 import ru.ladies.objects.ladiesentryfree.repository.ObjectRepository;
@@ -20,7 +21,6 @@ public class ObjectService {
     private final ObjectMapper objectMapper;
     private final ObjectCustomFieldsService objectCustomFieldsService;
 
-    //TODO дописать
 
     public Integer create(ObjectDTO dto) {
         return objectRepository.save(objectMapper.map(dto)).getId();
@@ -36,6 +36,7 @@ public class ObjectService {
         updatedObject.setId(oldObject.getId());
 
         objectRepository.save(updatedObject);
+        objectCustomFieldsService.updateCustomFieldsValues(objectRepository.save(updatedObject), dto.getCustomFields());
     }
 
     public void delete(Integer id) {
@@ -45,7 +46,8 @@ public class ObjectService {
     }
 
     public ObjectDTO getNewObject() {
-        return new ObjectDTO();
+        List<CustomFieldDTO> customFieldDTOS = objectCustomFieldsService.getAllFCustomFields();
+        return new ObjectDTO(customFieldDTOS);
     }
 
     public ObjectDTO getObject(Integer id) {

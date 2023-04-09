@@ -1,10 +1,12 @@
 package ru.ladies.objects.ladiesentryfree.model.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class ObjectDTO {
 
     private Integer id;
@@ -19,4 +21,7 @@ public class ObjectDTO {
     private List<AttachmentDTO> attachments;
     private List<CustomFieldDTO> customFields;
 
+    public ObjectDTO(List<CustomFieldDTO> customFields) {
+        this.customFields = customFields;
+    }
 }
