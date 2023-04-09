@@ -2,6 +2,7 @@ package ru.ladies.objects.ladiesentryfree.model.entities.objectRelated;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import ru.ladies.objects.ladiesentryfree.model.entities.solutionRelated.Solution;
 
 import java.util.List;
 
@@ -48,5 +49,8 @@ public class Object {
 
     @OneToMany(mappedBy = "object")
     private List<Attachment> attachments;
+
+    @OneToMany(mappedBy = "object")
+    private List<Solution> solutions;
 
 }
